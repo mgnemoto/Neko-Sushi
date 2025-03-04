@@ -289,6 +289,22 @@ for (const idVN of idsVNoche){
 
 //api google maps
 
+function loadGoogleMaps() {
+    fetch("./config.js") // Leer la API Key desde un archivo externo
+        .then(response => response.text())
+        .then(apiKey => {
+            const script = document.createElement("script");
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey.trim()}&libraries=places`;
+            script.async = true;
+            script.defer = true;
+            document.getElementById("googleMapsScript").replaceWith(script);
+        })
+        .catch(error => console.error("Error cargando la API Key:", error));
+}
+
+loadGoogleMaps(); // Llamar a la función al cargar la página
+
+
 //Crear opciones de mapa
 var myLatLng = { lat: -34.6109405, lng: -58.4706074 };
 var mapOptions = {
